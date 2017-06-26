@@ -63,6 +63,11 @@ var core = {
 		console.log(core.urls[type] + url);
 
 		return false;
+	},
+	actions: {
+		submit: function() {
+			core.root.submit(core.controllerCore);
+		}
 	}
 };
 
@@ -228,6 +233,11 @@ var componentRoom = {
 	 			target.fadeIn();
 	 		}
  		} 		
+  	},
+  	actions: {
+  		change: function() {
+  			componentOneTrip.element.change(componentOneTrip.controllerOneTrip);
+  		}
   	}
  };
 
@@ -236,12 +246,12 @@ $(document).ready(function() {
 
 	componentRoom.actions.watchRooms();
 
+	componentOneTrip.actions.change();
+
+	core.actions.submit();
+
 	$(".datepicker").datepicker({
 		minDate: new Date(),
 		dateFormat: 'dd/mm/yy'
 	});
-
-	componentOneTrip.element.change(componentOneTrip.controllerOneTrip);
-
-	core.root.submit(core.controllerCore);
 });
