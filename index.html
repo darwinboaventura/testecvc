@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>CVC - Teste</title>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<!-- bootstrap -->
+
+		<!-- jquery ui -->
+		<link rel="stylesheet" href="bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+		<!-- jquery ui -->
+
+		<link rel="stylesheet" href="src/css/style.css">
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active">
+							<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Pacotes</a>
+						</li>
+
+						<li role="presentation">
+							<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Passagens Aéreas</a>
+						</li>
+
+						<li role="presentation">
+							<a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Carros</a>
+						</li>
+
+						<li role="presentation">
+							<a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Hoteis</a>
+						</li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="home">
+							<form 
+								class="component-form"
+								data-type="packages"
+								data-one-trip="checkbox"
+								data-direct-Trip="checkbox"
+								data-from-City-Code="location"
+								data-to-City-Code="location"
+								data-leave-Date="date"
+								data-return-Date="date,oneTrip"
+								data-rooms="room">
+								<div class="row">
+									<div class="col-xs-12">
+										<h1>Pacotes</h1>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="true" name="oneTrip" class="component-oneTrip" data-cot-target=".cot-target"> Somente ida
+											</label>
+										</div>
+									</div>
+
+									<div class="col-sm-3">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="true" name="directTrip"> Somente voos diretos
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group component-location">
+											<label>Origem: </label>
+
+											<input type="text" name="fromCityCode" placeholder="Digite a cidade de origem" class="form-control" data-type="AIR" autocomplete="off" required>
+
+											<ul class="component-location__list"></ul>
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="form-group component-location">
+											<label>Destino: </label>
+
+											<input type="text" name="toCityCode" placeholder="Digite a cidade de destino" class="form-control" data-type="AIR" autocomplete="off" required>
+
+											<ul class="component-location__list"></ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Ida: </label>
+
+											<input type="text" name="leaveDate" class="datepicker form-control" placeholder="dd/mm/aaaa" required>
+										</div>
+									</div>
+
+									<div class="col-sm-6 cot-target">
+										<div class="form-group">
+											<label>Volta: </label>
+
+											<input type="text" name="returnDate" class="datepicker form-control" placeholder="dd/mm/aaaa">
+										</div>
+									</div>
+								</div>
+								
+								<div class="component-rooms">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label>Quartos: </label>
+
+												<select name="rooms" class="form-control" required>
+													<option value="1">1</option>
+													<option value="2">2</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="component-rooms__peopleQuantity">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label>
+														Adultos: 
+
+														<small>+18 anos</small>
+													</label>
+
+													<select name="roomAdults" class="form-control" required>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label>
+														Crianças: 
+
+														<small>0 à 17 anos</small>
+													</label>
+
+													<select name="roomChildren" class="form-control" onchange="javascript:componentRoom.selectChildren(this)" required>
+														<option value="0">0</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="component-rooms__peopleQuantity__ages row"></div>
+
+										<div class="clearfix"></div>
+									</div>	
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="submit" value="Buscar" class="btn btn-success">
+									</div>
+								</div>	
+							</form>
+						</div>
+
+						<div role="tabpanel" class="tab-pane" id="profile">
+							<form class="component-form"
+								data-type="airplane"
+								data-one-trip="checkbox"
+								data-direct-Trip="checkbox"
+								data-from-City-Code="location"
+								data-to-City-Code="location"
+								data-leave-Date="date"
+								data-return-Date="date,oneTrip"
+								data-ADT="touppercase"
+								data-CHD="touppercase"
+								data-INF="touppercase">
+								<div class="row">
+									<div class="col-xs-12">
+										<h1>Passagens Aéreas</h1>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="oneTrip" value="true" class="component-oneTrip" data-cot-target=".cot-target"> Somente ida
+											</label>
+										</div>
+									</div>
+
+									<div class="col-sm-3">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="directTrip" value="true">Somente voos diretos
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group component-location">
+											<label>Origem: </label>
+
+											<input type="text" name="fromCityCode" placeholder="Digite a cidade de origem" class="form-control" data-type="AIR" autocomplete="off" required>
+
+											<ul class="component-location__list"></ul>
+										</div>
+									</div>
+
+									<div class="col-sm-6 cot-target">
+										<div class="form-group component-location">
+											<label>Destino: </label>
+
+											<input type="text" name="toCityCode" placeholder="Digite a cidade de destino" class="form-control" data-type="AIR" autocomplete="off" required>
+
+											<ul class="component-location__list"></ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Ida: </label>
+
+											<input type="text" name="leaveDate" class="datepicker form-control" placeholder="dd/mm/aaaa" required>
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Volta: </label>
+
+											<input type="text" name="returnDate" class="datepicker form-control" placeholder="dd/mm/aaaa" required>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group">
+											<label>Quantidade de passageiros: </label>
+
+											<div class="row">
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>
+															Adultos
+
+															<small>(+12 anos)</small>
+														</label>
+
+														<select name="ADT" class="form-control" required>
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+															<option value="9">9</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>
+															Crianças
+
+															<small>(2 a 11 anos)</small>
+														</label>
+
+														<select name="CHD" class="form-control" required>
+															<option value="0">0</option>
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+															<option value="9">9</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="col-sm-4">
+													<div class="form-group">
+														<label>
+															Bebês
+
+															<small>(0 a 23 meses)</small>
+														</label>
+
+														<select class="form-control" name="INF" required>
+															<option value="0">0</option>
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+															<option value="9">9</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="submit" value="Buscar" class="btn btn-success" />
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<div role="tabpanel" class="tab-pane" id="messages">
+							<form class="component-form"
+								data-type="cars"
+								data-pick-Up-Location-Code="location"
+								data-other-Place="checkbox"
+								data-return-Location-Code="location"
+								data-pick-Up-Date="date"
+								data-return-Date="date"
+								data-pick-Up-Hour="select"
+								data-return-Hour="select"
+								>
+								<div class="row">
+									<div class="col-xs-12">
+										<h1>Carros</h1>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group component-location">
+											<label>Local de retirada: </label>
+
+											<input type="text" name="pickUpLocationCode" placeholder="Digite a cidade de retirada" class="form-control" data-type="CAR" autocomplete="off" required>
+
+											<ul class="component-location__list"></ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="otherPlace" value="true" class="component-oneTrip" data-cot-target=".cot-target" data-cot-type="true"> Devolvo o carro em outro local
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<div class="row cot-target display-n">
+									<div class="col-sm-12">
+										<div class="form-group component-location">
+											<label>Local de devolução: </label>
+
+											<input type="text" name="returnLocationCode" placeholder="Digite a cidade de devolução" class="form-control" data-type="CAR" autocomplete="off">
+
+											<ul class="component-location__list"></ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Início: </label>
+
+											<input type="text" name="pickUpDate" class="datepicker form-control" placeholder="dd/mm/aaaa" required>
+
+											<select class="form-control m-top-20" name="pickUpHour" required="">
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00">10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Término: </label>
+
+											<input type="text" name="returnDate" class="datepicker form-control" placeholder="dd/mm/aaaa" required>
+
+											<select class="form-control m-top-20" name="returnHour" required>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00">10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="submit" value="Buscar" class="btn btn-success">
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<div role="tabpanel" class="tab-pane" id="settings">
+							<form class="component-form"
+								data-type="hotels"
+								data-city-Code="location"
+								data-check-In="date"
+								data-check-out="date"
+								data-rooms="room"
+							>
+								<div class="row">
+									<div class="col-xs-12">
+										<h1>Hoteis</h1>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="form-group component-location">
+											<label>Destino / Hotel: </label>
+
+											<input type="text" name="cityCode" placeholder="Digite a cidade de origem" class="form-control" data-type="HOT" autocomplete="off" required>
+
+											<ul class="component-location__list"></ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Entrada: </label>
+
+											<input type="text" name="checkIn" class="datepicker form-control" placeholder="dd/mm/aaaa" required>
+										</div>
+									</div>
+
+									<div class="col-sm-6">
+										<div class="form-group">
+											<label>Saída: </label>
+
+											<input type="text" name="checkOut" class="datepicker form-control" placeholder="dd/mm/aaaa" required>
+										</div>
+									</div>
+								</div>
+
+								<div class="component-rooms">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label>Quartos: </label>
+
+												<select name="rooms" class="form-control" required>
+													<option value="1">1</option>
+													<option value="2">2</option>
+												</select>
+											</div>
+										</div>
+									</div>
+
+									<div class="component-rooms__peopleQuantity">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label>
+														Adultos: 
+
+														<small>+18 anos</small>
+													</label>
+
+													<select name="roomAdults" class="form-control" required="">
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-sm-6">
+												<div class="form-group">
+													<label>
+														Crianças: 
+
+														<small>0 à 17 anos</small>
+													</label>
+
+													<select name="roomChildren" class="form-control" onchange="javascript:componentRoom.selectChildren(this)">
+														<option value="0">0</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
+														<option value="7">7</option>
+														<option value="8">8</option>
+														<option value="9">9</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="component-rooms__peopleQuantity__ages row"></div>
+
+										<div class="clearfix"></div>
+									</div>	
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="submit" value="Buscar" class="btn btn-success">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+		
+		<!-- jquery -->
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<!-- jquery -->
+
+		<!-- jquery ui -->
+		<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+		<!-- jquery ui -->
+
+		<!-- bootstrap -->
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<!-- bootstrap -->
+
+		<!-- index js -->
+		<script src="src/js/index.js"></script>
+		<!-- index js -->
+	</body>
+</html>
